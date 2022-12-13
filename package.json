@@ -1,0 +1,24 @@
+{
+  "name": "project-b",
+  "version": "1.0.0",
+  "description": "교통 정보 제공 서비스",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polarisjyb/Project-B.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/polarisjyb/Project-B/issues"
+  },
+  "homepage": "https://github.com/polarisjyb/Project-B#readme",
+  "devDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
