@@ -2,7 +2,6 @@
 
 // tailwind css의 설정파일 생성
 
-
 module.exports = {
   /* src 디렉토리의 모든 html 또는 React Component 에서 Tailwind css를 사용할 수 있도록 설정 */
   content: [
