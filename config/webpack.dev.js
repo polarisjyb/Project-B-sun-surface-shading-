@@ -28,7 +28,7 @@ module.exports = merge(common, {
         // loader를 적용시킬 파일들을 정규식으로 명시
         test: /\.css$/i,
         
-        //  use : 사용할 loader
+        //  use : 지정된 'loader'가 test에서 적용한 파일을 컴파일
         // webpack에서 postcss를 읽어들이는 postcss-loader를 추가
         use: ["style-loader", "css-loader", "postcss-loader"],
       },
