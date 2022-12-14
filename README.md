@@ -3,7 +3,7 @@
 교통 정보 제공 서비스
 
 
-tailwind 사용
+tailwind css 프레임 워크 사용
 
 package.json
 
