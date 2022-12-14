@@ -1,5 +1,8 @@
 import {createRoot} from "react-dom/client";
 import App from "./App";
+import "./tailwind.css";
+
+// tailwind 적용 테스트중
 
 const container = document.getElementById("root");
 const root = createRoot(container as Element);
