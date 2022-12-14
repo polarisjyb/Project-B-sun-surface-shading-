@@ -1,8 +1,9 @@
 import {createRoot} from "react-dom/client";
 import App from "./App";
+
+// React의 시작 Entry인 index.js에서 tailwind.css 불러오기
 import "./tailwind.css";
 
-// tailwind 적용 테스트중
 
 const container = document.getElementById("root");
 const root = createRoot(container as Element);
