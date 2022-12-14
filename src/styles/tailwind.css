@@ -1,0 +1,4 @@
+/* tailwind 불러오기 */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
