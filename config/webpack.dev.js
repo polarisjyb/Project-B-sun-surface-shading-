@@ -8,7 +8,7 @@ module.exports = merge(common, {
     open: true,
     hot: true,
     compress: true,
-    port: 8081,
+    port: 8080,
     historyApiFallback: true,
     liveReload: true,
   },
@@ -20,6 +20,7 @@ module.exports = merge(common, {
     rules: [
       {
         test: /\.(sa|sc|c)ss$/i,
+        // webpack에서 postcss를 읽어들이는 postcss-loader를 추가
         use: ["style-loader", "css-loader", "postcss-loader"],
       },
     ],
