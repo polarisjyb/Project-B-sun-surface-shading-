@@ -17,7 +17,7 @@ const app = http.createServer((req, res) => {
     res.writeHead(404, {'Content-Type':'text/plain; charset=utf-8'});
     res.end('주소가 없습니다.');
     console.log('Not found');
-  }
+  };
 
   if(req.method === 'GET') {
     if(req.url === '/') {
