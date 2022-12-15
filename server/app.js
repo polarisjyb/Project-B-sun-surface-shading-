@@ -8,16 +8,19 @@ const app = http.createServer((req, res) => {
   const css = fs.readFileSync('../output/output.css', 'utf8');
   
   console.log(req.url);
-
+  
   if(req.method === 'GET') {
     if(req.url === '/') {
       res.writeHead(200, {'Content-Type':'text/html; charset= utf-8'});
-      res.end(index)
+      res.end(index);
     }
     else if (req.url === '/output/output.css') {
       res.writeHead(200, {'Content-Type':'text/css; charset= utf-8'});
-      res.end(css)
-    }
+      res.end(css);
+    } else {
+      res.writeHead(404, {'Content-Type':'text/plain; charset= utf-8'});
+      res.end('요청하신 주소는 없습니다.');
+    };
   };
   // const index = () => {
   //   fs.readFile('../public/index.html', 'utf8', (err, data) => {
