@@ -5,6 +5,9 @@
 
 tailwind css 프레임 워크 사용
 
+Tailwind CSS는 모든 HTML 파일, 자바스크립트 구성 요소 및 기타 템플릿에서 클래스 이름을 스캔하고 해당 스타일을 생성한 다음, 정적 CSS 파일에 쓰는 방식으로 작동합니다.
+
+
 package.json
 
 - tailwindcss는 tailwind css의 코어 패키지
