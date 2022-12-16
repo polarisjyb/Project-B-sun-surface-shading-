@@ -5,7 +5,7 @@ const port = process.env.PORT || 8800;
 const app = http.createServer((req, res) => {
   
   const index = fs.readFileSync('../public/index.html', 'utf8');
-  const css = fs.readFileSync('../output/output.css', 'utf8');
+  const css = fs.readFileSync('../public/output.css', 'utf8');
   
   console.log(req.url);
   
@@ -14,7 +14,7 @@ const app = http.createServer((req, res) => {
       res.writeHead(200, {'Content-Type':'text/html; charset= utf-8'});
       res.end(index);
     }
-    else if (req.url === '/output/output.css') {
+    else if (req.url === '/output.css') {
       res.writeHead(200, {'Content-Type':'text/css; charset= utf-8'});
       res.end(css);
     } else {
