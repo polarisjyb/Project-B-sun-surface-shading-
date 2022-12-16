@@ -33,6 +33,13 @@ module.exports = {
         exclude: /node_modules/,
         // loader를 배제시킬 파일 명시
       },
+      {
+        test: /\.(png|jpg|svg|gif)$/,
+        use: 
+          {
+            loader: "file-loader",
+          },
+      },
     ],
   },
   plugins: [
@@ -58,7 +65,9 @@ module.exports = {
       React: "react",
     }),
     new webpack.ProgressPlugin(),
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      cleanAfterEveryBuildPatterns: ["dist"],
+    }),
   ],
 
   // resolve는 모듈해석에 대한 설정으로 특정 모듈을 호출할 때 모듈을 찾는 위치를 변경할 수 있다.

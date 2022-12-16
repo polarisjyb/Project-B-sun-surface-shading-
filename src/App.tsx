@@ -10,6 +10,7 @@ const features = [
 const App = () => {
   return (
   <div className="bg-white">
+    <img src="img/loading.gif" alt="logo" />
     <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-y-16 gap-x-8 py-24 px-4 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
       <div>
         <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Hello Jumper!</h2>
