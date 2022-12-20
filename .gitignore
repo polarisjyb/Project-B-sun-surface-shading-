@@ -1,3 +1,6 @@
 node_modules
-.env
 dist
+
+# dotenv environment variable files
+.env
+
