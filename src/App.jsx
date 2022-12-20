@@ -1,9 +1,12 @@
-import react, { useState } from "react";
+import react from "react";
+import Sphere from "./components/Sphere";
+
+// import { Canvas } from "@react-three/fiber";
+// import Sphere from "./components/Sphere";
 
 const App = () => {
-
   return (
-    <div>Hello Jumper!</div>
+    <Sphere />
   );
 };
 
