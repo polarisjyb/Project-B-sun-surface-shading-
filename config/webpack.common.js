@@ -16,7 +16,7 @@ dotenv.config();
 
 module.exports = {
   /* entry는 애플리케이션이 실행되며 webpack이 번들링을 시작하는 곳이다. */
-  entry: `${path.resolve(__dirname, "../src")}/index.tsx`,
+  entry: `${path.resolve(__dirname, "../src")}/index.jsx`,
   module: {
     rules: [
       /*
