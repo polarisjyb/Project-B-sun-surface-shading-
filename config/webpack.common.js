@@ -11,6 +11,8 @@ const webpack = require("webpack");
 // BundleAnalyzer는 Bundle 최적화 용도로 사용
 
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const dotenv = require('dotenv');
+dotenv.config();
 
 module.exports = {
   /* entry는 애플리케이션이 실행되며 webpack이 번들링을 시작하는 곳이다. */
@@ -59,6 +61,9 @@ module.exports = {
     }),
     new webpack.ProgressPlugin(),
     new CleanWebpackPlugin(),
+    new webpack.DefinePlugin({
+      "process.env": JSON.stringify(process.env)
+    })
   ],
 
   // resolve는 모듈해석에 대한 설정으로 특정 모듈을 호출할 때 모듈을 찾는 위치를 변경할 수 있다.
