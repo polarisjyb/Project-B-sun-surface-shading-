@@ -4,6 +4,8 @@ import App from "./App";
 // React의 시작 Entry인 index.js에서 tailwind.css 불러오기
 // import "./styles/tailwind.css";
 
+import "./styles/index.css";
+
 const container = document.getElementById("root");
 const root = createRoot(container);
 
