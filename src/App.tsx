@@ -16,7 +16,7 @@ const App = () => {
         {...viewport}
         mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
         onMove={e => setViewport(e.viewState)}
-        style={{width: "600px", height:"400px" }}
+        style={{width: "800px", height:"800px" }}
         mapStyle="mapbox://styles/polarislsj/clbueti1r001414t1npzeqehk"
         >
       </Map>
