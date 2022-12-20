@@ -3,8 +3,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import Map from 'react-map-gl';
 
 const App = () => {
-
-  const REACT_APP_MAPBOX_TOKEN = 'Your token'
   
   const [ viewport, setViewport ] = useState({
     latitude: 37.532600,
@@ -16,7 +14,7 @@ const App = () => {
     <div className="Mapbox">
       <Map
         {...viewport}
-        mapboxAccessToken={REACT_APP_MAPBOX_TOKEN}
+        mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
         onMove={e => setViewport(e.viewState)}
         style={{width: "600px", height:"400px" }}
         mapStyle="mapbox://styles/polarislsj/clbueti1r001414t1npzeqehk"
