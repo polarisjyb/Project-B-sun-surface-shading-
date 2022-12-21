@@ -31,12 +31,12 @@ module.exports = merge(common, {
           "css-loader","postcss-loader"
         ],
       },
-      {
-        test: /\.png$/i,
-        use: [
-          "file-loader",
-        ],
-      },
+      // {
+      //   test: /\.png$/i,
+      //   use: [
+      //     "file-loader",
+      //   ],
+      // },
     ],
   },
   // resolve: {
