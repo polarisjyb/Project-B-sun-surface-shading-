@@ -1,0 +1,1 @@
+{"version":3,"file":"main.css","mappings":"AACA","sources":["webpack://project-b/./src/styles/tailwind.css"],"sourcesContent":["/* tailwind 불러오기 */\r\n@import \"tailwindcss/base\";\r\n@import \"tailwindcss/components\";\r\n@import \"tailwindcss/utilities\";"],"names":[],"sourceRoot":""}
