@@ -12,6 +12,8 @@ const webpack = require("webpack");
 
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
+
+
 module.exports = {
   /* entry는 애플리케이션이 실행되며 webpack이 번들링을 시작하는 곳이다. */
   entry: `${path.resolve(__dirname, "../src")}/index.tsx`,
@@ -33,6 +35,14 @@ module.exports = {
         exclude: /node_modules/,
         // loader를 배제시킬 파일 명시
       },
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        loader: 'file-loader',
+        options: {
+          // outputPath: 'img/'
+          name: '/img/[name].[ext]'
+        }
+      }
     ],
   },
   plugins: [
