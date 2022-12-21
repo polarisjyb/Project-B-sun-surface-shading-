@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls } from "@react-three/drei";
-import { BoxGeometry } from 'three';
 
 
 const Box = (props) => {
@@ -24,11 +23,17 @@ const Box = (props) => {
 
 export default function Scene() {
   return (
-    <Canvas dpr={window.devicePixelRatio}>
+    // <Canvas>
+    //   <ambientLight />
+    //   <pointLight position={[10, 10, 10]} />
+    //   <Box position={[0, 0, 0]} />
+    //   <OrbitControls autoRotate autoRotateSpeed={5} />
+    // </Canvas>
+    <>
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
       <Box position={[0, 0, 0]} />
       <OrbitControls autoRotate autoRotateSpeed={5} />
-    </Canvas>
+    </>
   );
 }
