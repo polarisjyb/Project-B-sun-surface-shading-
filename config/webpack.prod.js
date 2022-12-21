@@ -31,8 +31,23 @@ module.exports = merge(common, {
           "css-loader","postcss-loader"
         ],
       },
+      {
+        test: /\.png$/i,
+        use: [
+          "file-loader",
+        ],
+      },
     ],
   },
+  // resolve: {
+
+  //   // 별칭을 써줌으로써 절대 경로를 설정
+  //   alias: {
+  //     "dist": path.resolve(__dirname, "../dist/"),
+  //   },
+  //   // 확장자 명칭을 생략 가능한 것들을 설정
+  //   // extensions: [".js", ".ts", ".jsx", ".tsx", ".css", ".json", ],
+  // },
   plugins: [new MiniCssExtractPlugin()],
   optimization: {
     usedExports: true,
