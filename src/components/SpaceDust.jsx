@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import React, { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import Random from 'canvas-sketch-util/random';
+// import { Canvas } from '@react-three/fiber';
 
 export function SpaceDust({ count }) {
   const mesh = useRef();
@@ -59,7 +60,7 @@ export function SpaceDust({ count }) {
       <pointLight ref={light} distance={40} intensity={8} color="lightblue" />
       <instancedMesh ref={mesh} args={[null, null, count]}>
         <dodecahedronBufferGeometry args={[0.2, 0]} />
-        <meshPhongMaterial color="#fff" />
+        <meshPhongMaterial color="#666666" />
       </instancedMesh>
     </>
   );
