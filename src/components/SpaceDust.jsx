@@ -13,11 +13,11 @@ export function SpaceDust({ count }) {
     const temp = [];
     for (let i = 0; i < count; i++) {
       const time = Random.range(0, 100);
-      const factor = Random.range(20, 120);
+      const factor = Random.range(50, 300);
       const speed = Random.range(0.01, 0.015) / 2;
-      const x = Random.range(-50, 50);
-      const y = Random.range(-50, 50);
-      const z = Random.range(-50, 50);
+      const x = Random.range(-100, 100);
+      const y = Random.range(-100, 100);
+      const z = Random.range(-100, 100);
 
       temp.push({ time, factor, speed, x, y, z });
     }
@@ -37,9 +37,9 @@ export function SpaceDust({ count }) {
       // Update the particle position based on the time
       // This is mostly random trigonometry functions to oscillate around the (x, y, z) point
       SpaceDust.position.set(
-        x + Math.cos((t / 10) * factor) + (Math.sin(t * 1) * factor) / 10,
-        y + Math.sin((t / 10) * factor) + (Math.cos(t * 2) * factor) / 10,
-        z + Math.cos((t / 10) * factor) + (Math.sin(t * 3) * factor) / 10
+        x + Math.cos((t / 10) * factor) + (Math.sin(t * 1) * factor) / 20,
+        y + Math.sin((t / 10) * factor) + (Math.cos(t * 2) * factor) / 20,
+        z + Math.cos((t / 10) * factor) + (Math.sin(t * 3) * factor) / 20
       );
 
       // Derive an oscillating value which will be used
@@ -60,7 +60,7 @@ export function SpaceDust({ count }) {
       <pointLight ref={light} distance={40} intensity={8} color="lightblue" />
       <instancedMesh ref={mesh} args={[null, null, count]}>
         <dodecahedronBufferGeometry args={[0.2, 0]} />
-        <meshPhongMaterial color="#666666" />
+        <meshPhongMaterial color="#676767" sizeAttenuation= "true" />
       </instancedMesh>
     </>
   );
