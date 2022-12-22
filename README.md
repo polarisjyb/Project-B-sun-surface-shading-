@@ -6,3 +6,5 @@
 - webpack.common.js 파일에서 options 프로퍼티의 객체 name을 설정하여 file-loader를 통해 읽고 해당 파일을 다른 곳으로 옮김으로써 dist/img 하위 파일로 들어가도록 설정
 - webpack-dev-sever 와 npm run build 로 번들링 된 파일 모두 브라우저에서 동일하게 출력 되는 것을 확인
 - gitignore 파일에 dist 폴더 추가
+
+
