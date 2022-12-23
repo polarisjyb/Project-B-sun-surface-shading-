@@ -13,7 +13,7 @@ export function SpaceDust({ count }) {
     const temp = [];
     for (let i = 0; i < count; i++) {
       const time = Random.range(0, 100);
-      const factor = Random.range(50, 300);
+      const factor = Random.range(30, 200);
       const speed = Random.range(0.01, 0.015) / 2;
       const x = Random.range(-100, 100);
       const y = Random.range(-100, 100);
@@ -59,8 +59,8 @@ export function SpaceDust({ count }) {
     <>
       <pointLight ref={light} distance={40} intensity={8} color="lightblue" />
       <instancedMesh ref={mesh} args={[null, null, count]}>
-        <dodecahedronBufferGeometry args={[0.2, 0]} />
-        <meshPhongMaterial color="#676767" sizeAttenuation= "true" />
+        <dodecahedronGeometry args={[0.2, 0]} />
+        <meshPhongMaterial color="#fff" sizeAttenuation= "true" />
       </instancedMesh>
     </>
   );
