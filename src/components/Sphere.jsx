@@ -19,8 +19,8 @@ const Sphere = (props) => {
   return (
     <points {...props} ref={points}>
       {/* <boxGeometry args={[1, 1, 1]} /> */}
-      <sphereGeometry args={[10, 32, 32]} />
-      <pointsMaterial color="#5786F5" size={0.07} sizeAttenuation />
+      <sphereGeometry args={[20, 50, 100]} />
+      <pointsMaterial color="#5786F5" size={0.1} sizeAttenuation />
       {/* <meshStandardMaterial color="#f2f" /> */}
     </points>
   );
@@ -52,7 +52,7 @@ export default function Scene() {
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
       <Sphere position={[0, 0, 0]}/>
-      <OrbitControls target={[0, 0, 5]} enableDamping={true} autoRotate autoRotateSpeed={5} />
+      <OrbitControls target={[0, 0, 5]} enableDamping={true} autoRotate autoRotateSpeed={8} />
     </>
     // <>
     //   <ambientLight />

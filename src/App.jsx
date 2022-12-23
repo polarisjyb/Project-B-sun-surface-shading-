@@ -11,13 +11,13 @@ const App = () => {
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
       <Canvas camera={{
-        position: [0, 0, 30],
-        fov: 100,
+        position: [0, 0, 50],
+        fov: 90,
         near: 0.1,
         far: 3000,}}>
         <SpaceDust count={500} />
         <Sphere />
-        <axesHelper args={[100, 100, 100]} />
+        <axesHelper args={[3000, 3000, 3000]} />
       </Canvas>
     </div>
   );
