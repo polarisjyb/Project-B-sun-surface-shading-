@@ -1,5 +1,5 @@
 # Project-B
-# threejs-globe-1
+# threejs-globe-2
 
 three.js 와 react 를 이용한 렌더링
 
