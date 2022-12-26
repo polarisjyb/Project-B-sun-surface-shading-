@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { useRef,useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls } from "@react-three/drei";
+// import { DoubleSide, Vector2, Vector3 } from 'three';
 
 // import { SpaceDust } from './SpaceDust';
 
@@ -391,18 +392,23 @@ const Sphere = (props) => {
       uTime: {
         value: 0,
       },
+      // uMouse: {
+      //   value: Vector2
+      // },
+      // uResolution: {
+      //   value: Vector2
+      // },
     }), []
   );
 
   useFrame((state) => {
     const { clock } = state;
     mesh.current.material.uniforms.uTime.value = clock.getElapsedTime();
-    // mesh.current.rotation.z   = mesh.current.rotation.x += 0.001
+    mesh.current.rotation.y   = mesh.current.rotation.y += 0.0001
   });
 
   return (
-
-    // // mesh 구체
+    // mesh 구체
     <mesh {...props} ref={mesh} >
     {/* <boxGeometry args={[1, 1, 1]} /> */}
     <sphereGeometry args={[10, 100, 100]} />
@@ -411,6 +417,7 @@ const Sphere = (props) => {
     vertexShader={sunNoiseVertexShader}
     fragmentShader={sunNoiseFragmentShader}
     uniforms={uniforms}
+    // side={DoubleSide}
     />
     {/* <meshPhongMaterial color="#f2f" sizeAttenuation /> */}
     {/* <shaderMaterial ref={sunNoiseMaterial}
@@ -418,10 +425,7 @@ const Sphere = (props) => {
     fragmentShader={sunNoiseFragmentShader}
     /> */}
     </mesh>
-    
   );
-
-
 }
 
 export default function Scene() {
