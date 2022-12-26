@@ -1,8 +1,7 @@
 import * as THREE from 'three';
-import { useRef } from 'react';
+import { useRef,useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls } from "@react-three/drei";
-import { DoubleSide, Vector2 } from 'three';
 
 // import { SpaceDust } from './SpaceDust';
 
@@ -32,6 +31,8 @@ const Sphere = (props) => {
   const mesh = useRef();
   const sunNoiseMaterial = useRef();
   const sunShapeMaterial = useRef();
+  
+
 
   const sunNoiseVertexShader = `
     #define GLSLIFY 1
@@ -334,31 +335,90 @@ const Sphere = (props) => {
   }
   `;
 
-  useFrame(() => {
-    mesh.current.rotation.y   = mesh.current.rotation.y += 0.0003
+  const sunRingVertexShader = `
+  #define GLSLIFY 1
+  varying vec2 vUv;
+  varying vec3 vPosition;
+  
+  void main(){
+      vec4 modelPosition=modelMatrix*vec4(position,1.);
+      vec4 viewPosition=viewMatrix*modelPosition;
+      vec4 projectedPosition=projectionMatrix*viewPosition;
+      gl_Position=projectedPosition;
+      
+      vUv=uv;
+      vPosition=position;
+  }
+  `;
+  const sunRingFragmentShader = `
+  #define GLSLIFY 1
+  
+  float invert(float n){
+      return 1.-n;
+  }
+  
+  vec3 invert(vec3 n){
+      return 1.-n;
+  }
+  
+  // https://www.shadertoy.com/view/XlSSzK
+  vec3 firePalette(float i){
+      float T=1400.+1300.*i;// Temperature range (in Kelvin).
+      vec3 L=vec3(7.4,5.6,4.4);// Red, green, blue wavelengths (in hundreds of nanometers).
+      L=pow(L,vec3(5.))*(exp(1.43876719683e5/(T*L))-1.);
+      return 1.-exp(-5e8/L);// Exposure level. Set to "50." For "70," change the "5" to a "7," etc.
+  }
+  
+  uniform float uTime;
+  uniform vec2 uMouse;
+  uniform vec2 uResolution;
+  
+  varying vec2 vUv;
+  varying vec3 vPosition;
+  
+  void main(){
+      float radial=invert(vPosition.z);
+      radial=pow(radial,3.);
+      float brightness=(1.+radial*.83)*radial*.4;
+      vec3 ringColor=firePalette(brightness);
+      vec4 color=vec4(ringColor,radial);
+      gl_FragColor=color;
+  }
+  `;
+
+  const uniforms = useMemo(
+    () => ({
+      uTime: {
+        value: 0,
+      },
+    }), []
+  );
+
+  useFrame((state) => {
+    const { clock } = state;
+    mesh.current.material.uniforms.uTime.value = clock.getElapsedTime();
+    // mesh.current.rotation.z   = mesh.current.rotation.x += 0.001
   });
 
   return (
-    // <points {...props} ref={points}>
-    //   {/* <boxGeometry args={[1, 1, 1]} /> */}
-    //   <sphereGeometry args={[10, 32, 32]} />
-    //   <pointsMaterial color="#5786F5" size={0.07} sizeAttenuation />
-    // </points>
+
+    // // mesh 구체
     <mesh {...props} ref={mesh} >
     {/* <boxGeometry args={[1, 1, 1]} /> */}
-    <sphereGeometry args={[5, 32, 16]} />
+    <sphereGeometry args={[10, 100, 100]} />
     <shaderMaterial
-    // ref={sunNoiseMaterial}
-    // vertexShader={sunNoiseVertexShader}
-    // fragmentShader={sunNoiseFragmentShader}
-    // side={DoubleSide}
-    />
-    {/* <meshPhongMaterial color="#f2f" sizeAttenuation /> */}
-    <shaderMaterial ref={sunNoiseMaterial}
+    ref={mesh}
     vertexShader={sunNoiseVertexShader}
     fragmentShader={sunNoiseFragmentShader}
+    uniforms={uniforms}
     />
+    {/* <meshPhongMaterial color="#f2f" sizeAttenuation /> */}
+    {/* <shaderMaterial ref={sunNoiseMaterial}
+    vertexShader={sunNoiseVertexShader}
+    fragmentShader={sunNoiseFragmentShader}
+    /> */}
     </mesh>
+    
   );
 
 
@@ -368,9 +428,9 @@ export default function Scene() {
   return (
     <>
       <ambientLight />
-      {/* <pointLight position={[10, 10, 10]} /> */}
+      <pointLight position={[10, 10, 10]} />
       <Sphere position={[0, 0, 0]}/>
-      <OrbitControls target={[0, 0, 5]} autoRotate autoRotateSpeed={5} />
+      <OrbitControls target={[0, 0, 5]} /* autoRotate autoRotateSpeed={5} */ />
     </>
     // <>
     //   <ambientLight />
