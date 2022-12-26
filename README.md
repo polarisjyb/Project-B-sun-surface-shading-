@@ -1,8 +1,12 @@
 # Project-B
 
-태양계
+태양계 탐사 프로젝트
 
-tailwind css 프레임 워크 사용
+* glsl
+* threejs
+* react-three-fiber
+* react-three-drei
+* tailwind css 프레임 워크 사용 예정
 
 package.json
 
