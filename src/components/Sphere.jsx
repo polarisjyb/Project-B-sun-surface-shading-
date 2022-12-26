@@ -2,8 +2,6 @@ import * as THREE from 'three';
 import { useRef,useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls } from "@react-three/drei";
-// import { DoubleSide, Vector2, Vector3 } from 'three';
-
 // import { SpaceDust } from './SpaceDust';
 
 const Sphere = (props) => {
@@ -35,35 +33,48 @@ const Sphere = (props) => {
   
 
 
-  // const sunNoiseVertexShader = `
-  //   #define GLSLIFY 1
-  //   varying vec2 vUv;
-  //   varying vec3 vPosition;
-    
-  //   void main(){
-  //       vec4 modelPosition=modelMatrix*vec4(position,1.);
-  //       vec4 viewPosition=viewMatrix*modelPosition;
-  //       vec4 projectedPosition=projectionMatrix*viewPosition;
-  //       gl_Position=projectedPosition;
-        
-  //       vUv=uv;
-  //       vPosition=position;
-  //   }
-  // `;
-
   const sunNoiseVertexShader = `
-    uniform float uTime;
+    #define GLSLIFY 1
     varying vec2 vUv;
     varying vec3 vPosition;
-    uniform vec2 pixels;
-    float PI = 3.142592653589793238;
+    
     void main(){
-      vUv = uv;
-      vPosition = position;
-      gl_Position = projectionMatrix *
-      modelViewMatrix * vec4 ( position, 1.0);
+        vec4 modelPosition=modelMatrix*vec4(position, 1.);
+        vec4 viewPosition=viewMatrix*modelPosition;
+        vec4 projectedPosition=projectionMatrix*viewPosition;
+        gl_Position=projectedPosition;
+        
+        vUv=uv;
+        vPosition=position;
     }
   `;
+
+  // 복제 VertexShader (cubeTexture 용)
+  // const sunNoiseVertexShader = `
+  //   uniform float uTime;
+  //   varying vec2 vUv;
+  //   varying vec3 vPosition;
+  //   uniform vec2 pixels;
+  //   float PI = 3.142592653589793238;
+
+  //   varying vec3 vLayer0;
+  //   varying vec3 vLayer1;
+  //   varying vec3 vLayer2;
+
+  //   mat2 rotate(float a){
+  //     float s = sin(a);
+  //     float c = cos(a);
+  //     return mat2(c,-s,s,c);
+  //   }
+
+
+  //   void main(){
+  //     vUv = uv;
+  //     vPosition = position;
+  //     gl_Position = projectionMatrix *
+  //     modelViewMatrix * vec4 ( position, 1.0);
+  //   }
+  // `;
   
   const sunNoiseFragmentShader = `
     
@@ -206,7 +217,7 @@ const Sphere = (props) => {
         }
         return sum;
     }
-    
+    // 태양 표면 효과
     void main(){
         vec4 p = vec4(vPosition*0.3,uTime*0.04);
         float noise = fbm4d(p);
@@ -215,15 +226,28 @@ const Sphere = (props) => {
         float spots = max(snoise(p1),0.);
         gl_FragColor=vec4(noise);
         gl_FragColor *= mix(1., spots, 0.7);
+    }
+  `;
 
-        }
-      `;
-      // void main(){
-      //   float noise=snoise(vec4(vUv*10.,1.,uTime));
-      //   vec4 p1=vec4(vPosition*5.,uTime*.25);
-      //   float spot=max(snoise(p1),0.);
-      //   gl_FragColor=vec4(noise);
-      // }`;
+  // noise 간격이 촘촘한 효과
+  //   void main(){
+  //     vec4 p=vec4(vPosition*10.,uTime*.025);
+  //     float noise=fbm4d(p);
+  //     vec4 p1=vec4(vPosition*5.,uTime*.25);
+  //     float spot=max(snoise(p1),0.);
+  //     vec4 color=vec4(noise);
+  //     color*=mix(1.,spot,.7);
+  //     gl_FragColor=color;
+  //   }
+  // `;
+
+    // 표면적이 큰 noise 연기로 감싸는 느낌의 효과
+    // void main(){
+    //   float noise=snoise(vec4(vUv*10.,1.,uTime));
+    //   vec4 p1=vec4(vPosition*5.,uTime*.25);
+    //   float spot=max(snoise(p1),0.);
+    //   gl_FragColor=vec4(noise);
+    // }`;
       
   const sunShapeVertexShader = `
   #define GLSLIFY 1
