@@ -35,19 +35,33 @@ const Sphere = (props) => {
   
 
 
+  // const sunNoiseVertexShader = `
+  //   #define GLSLIFY 1
+  //   varying vec2 vUv;
+  //   varying vec3 vPosition;
+    
+  //   void main(){
+  //       vec4 modelPosition=modelMatrix*vec4(position,1.);
+  //       vec4 viewPosition=viewMatrix*modelPosition;
+  //       vec4 projectedPosition=projectionMatrix*viewPosition;
+  //       gl_Position=projectedPosition;
+        
+  //       vUv=uv;
+  //       vPosition=position;
+  //   }
+  // `;
+
   const sunNoiseVertexShader = `
-    #define GLSLIFY 1
+    uniform float uTime;
     varying vec2 vUv;
     varying vec3 vPosition;
-    
+    uniform vec2 pixels;
+    float PI = 3.142592653589793238;
     void main(){
-        vec4 modelPosition=modelMatrix*vec4(position,1.);
-        vec4 viewPosition=viewMatrix*modelPosition;
-        vec4 projectedPosition=projectionMatrix*viewPosition;
-        gl_Position=projectedPosition;
-        
-        vUv=uv;
-        vPosition=position;
+      vUv = uv;
+      vPosition = position;
+      gl_Position = projectionMatrix *
+      modelViewMatrix * vec4 ( position, 1.0);
     }
   `;
   
@@ -194,16 +208,18 @@ const Sphere = (props) => {
     }
     
     void main(){
-        vec4 p=vec4(vPosition*10.,uTime*.025);
-        float noise=fbm4d(p);
-        vec4 p1=vec4(vPosition*5.,uTime*.25);
-        float spot=max(snoise(p1),0.);
-        vec4 color=vec4(noise);
-        color*=mix(1.,spot,.7);
-        gl_FragColor=color;
-    }
-  `;
-
+        vec4 p = vec4(vPosition*0.4,uTime*0.1);
+        float noise = fbm4d(p);
+        gl_FragColor=vec4(noise);
+      }
+      `;
+      // void main(){
+      //   float noise=snoise(vec4(vUv*10.,1.,uTime));
+      //   vec4 p1=vec4(vPosition*5.,uTime*.25);
+      //   float spot=max(snoise(p1),0.);
+      //   gl_FragColor=vec4(noise);
+      // }`;
+      
   const sunShapeVertexShader = `
   #define GLSLIFY 1
   mat2 rotation2d(float angle) {
@@ -411,7 +427,7 @@ const Sphere = (props) => {
     // mesh 구체
     <mesh {...props} ref={mesh} >
     {/* <boxGeometry args={[1, 1, 1]} /> */}
-    <sphereGeometry args={[10, 100, 100]} />
+    <sphereBufferGeometry args={[10, 100, 100]} />
     <shaderMaterial
     ref={mesh}
     vertexShader={sunNoiseVertexShader}
