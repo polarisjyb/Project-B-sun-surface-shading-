@@ -208,10 +208,15 @@ const Sphere = (props) => {
     }
     
     void main(){
-        vec4 p = vec4(vPosition*0.4,uTime*0.1);
+        vec4 p = vec4(vPosition*0.3,uTime*0.04);
         float noise = fbm4d(p);
         gl_FragColor=vec4(noise);
-      }
+        vec4 p1=vec4(vPosition*2.,uTime*0.005);
+        float spots = max(snoise(p1),0.);
+        gl_FragColor=vec4(noise);
+        gl_FragColor *= mix(1., spots, 0.7);
+
+        }
       `;
       // void main(){
       //   float noise=snoise(vec4(vUv*10.,1.,uTime));
@@ -420,14 +425,14 @@ const Sphere = (props) => {
   useFrame((state) => {
     const { clock } = state;
     mesh.current.material.uniforms.uTime.value = clock.getElapsedTime();
-    mesh.current.rotation.y = mesh.current.rotation.y += 0.001
+    mesh.current.rotation.y = mesh.current.rotation.y += 0
   });
 
   return (
     // mesh 구체
     <mesh {...props} ref={mesh} >
     {/* <boxGeometry args={[1, 1, 1]} /> */}
-    <sphereBufferGeometry args={[10, 100, 100]} />
+    <sphereGeometry args={[10, 100, 100]} />
     <shaderMaterial
     ref={mesh}
     vertexShader={sunNoiseVertexShader}
@@ -450,7 +455,7 @@ export default function Scene() {
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
       <Sphere position={[0, 0, 0]}/>
-      <OrbitControls target={[0, 0, 0]} autoRotate /* autoRotateSpeed={5} */ />
+      <OrbitControls target={[0, 0, 0]} /* autoRotate */ /* autoRotateSpeed={5} */ />
     </>
     // <>
     //   <ambientLight />
