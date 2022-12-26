@@ -420,7 +420,7 @@ const Sphere = (props) => {
   useFrame((state) => {
     const { clock } = state;
     mesh.current.material.uniforms.uTime.value = clock.getElapsedTime();
-    mesh.current.rotation.y   = mesh.current.rotation.y += 0.0001
+    mesh.current.rotation.y = mesh.current.rotation.y += 0.001
   });
 
   return (
@@ -450,7 +450,7 @@ export default function Scene() {
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
       <Sphere position={[0, 0, 0]}/>
-      <OrbitControls target={[0, 0, 5]} /* autoRotate autoRotateSpeed={5} */ />
+      <OrbitControls target={[0, 0, 0]} autoRotate /* autoRotateSpeed={5} */ />
     </>
     // <>
     //   <ambientLight />
