@@ -1,7 +1,6 @@
 # Project-B
 
-교통 정보 제공 서비스
-
+태양계
 
 tailwind css 프레임 워크 사용
 
