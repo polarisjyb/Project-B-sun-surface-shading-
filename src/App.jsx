@@ -15,7 +15,7 @@ const App = () => {
         fov: 90,
         near: 0.1,
         far: 3000,}}>
-        <SpaceDust count={3000} />
+        <SpaceDust count={100} />
         <Sphere />
         <axesHelper args={[3000, 3000, 3000]} />
       </Canvas>

@@ -246,7 +246,7 @@ const Sphere = (props) => {
     //   float spot=max(snoise(p1),0.);
     //   gl_FragColor=vec4(noise);
     // }`;
-      
+    
   const sunShapeVertexShader = `
   #define GLSLIFY 1
   mat2 rotation2d(float angle) {
@@ -447,7 +447,9 @@ const Sphere = (props) => {
   useFrame((state) => {
     const { clock } = state;
     mesh.current.material.uniforms.uTime.value = clock.getElapsedTime();
-    mesh.current.rotation.y = mesh.current.rotation.y += 0
+    mesh.current.rotation.y = mesh.current.rotation.y += 0.0001
+    // console.log(clock);
+
   });
 
   return (
