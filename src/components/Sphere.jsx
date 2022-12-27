@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { useRef,useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls } from "@react-three/drei";
+import { Vector3, Vector4 } from 'three';
 // import { SpaceDust } from './SpaceDust';
 
 const Sphere = (props) => {
@@ -218,9 +219,13 @@ const Sphere = (props) => {
     void main(){
         vec4 p = vec4(vPosition*0.3,uTime*0.03);
         float noise = fbm4d(p);
-        gl_FragColor=vec4(noise);
+        gl_FragColor = vec4(noise);
         float spots = max(snoise(p), 0.2);
         gl_FragColor *= mix(1., spots, 0.7);
+        
+        // 청백색 색깔 입히기
+        vec3 color = vec3( vUv * ( 1. - 2. * noise ), 1.0 );
+        gl_FragColor = vec4( color.rgb, 1. );
     }
   `;
   
@@ -430,13 +435,13 @@ const Sphere = (props) => {
   const uniforms = useMemo(
     () => ({
       uTime: {
-        value: 0,
+        value: 0.0,
       },
       // uMouse: {
-      //   value: Vector2
+      //   value: Vector3
       // },
       // uResolution: {
-      //   value: Vector2
+      //   value: Vector4
       // },
     }), []
   );
@@ -459,7 +464,6 @@ const Sphere = (props) => {
     vertexShader={sunNoiseVertexShader}
     fragmentShader={sunNoiseFragmentShader}
     uniforms={uniforms}
-    // side={DoubleSide}
     />
     {/* <meshPhongMaterial color="#f2f" sizeAttenuation /> */}
     {/* <shaderMaterial ref={sunNoiseMaterial}
