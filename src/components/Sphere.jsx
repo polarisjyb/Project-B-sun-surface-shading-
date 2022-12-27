@@ -129,9 +129,6 @@ const Sphere = (props) => {
       vec4 i  = floor(v + dot(v, vec4(F4)) );
       vec4 x0 = v -   i + dot(i, C.xxxx);
     
-    // Other corners
-    
-    // Rank sorting originally contributed by Bill Licea-Kane, AMD (formerly ATI)
       vec4 i0;
       vec3 isX = step( x0.yzw, x0.xxx );
       vec3 isYZ = step( x0.zww, x0.yyz );
