@@ -478,7 +478,7 @@ export default function Scene() {
   return (
     <>
       {/* <ambientLight /> */}
-      <pointLight position={[0, 20, 40]} />
+      <pointLight position={[50, 20, 40]} />
       <Sphere position={[0, 0, 0]}/>
       <OrbitControls target={[0, 0, 0]} autoRotate autoRotateSpeed={0.01} />
     </>
