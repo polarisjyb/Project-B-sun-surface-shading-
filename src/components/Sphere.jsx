@@ -9,18 +9,17 @@ const Sphere = (props) => {
 
   // particle - points
   // draw the sphere (points)
-
   // const points = useRef();
 
   // useFrame((state) => {
-  //   points.current.rotation.y = points.current.rotation.z += 0.01
+  //   points.current.rotation.y = points.current.rotation.z += 0.004
   // });
 
   // return (
   //   <points {...props} ref={points}>
   //     {/* <boxGeometry args={[1, 1, 1]} /> */}
-  //     <sphereBufferGeometry args={[20, 50, 100]} />
-  //     <pointsMaterial color="#5786F5" size={0.1} sizeAttenuation />
+  //     <sphereBufferGeometry args={[10, 30, 100]} />
+  //     <pointsMaterial color="#5786F5" size={0.1}/*  sizeAttenuation */ />
   //     {/* <meshStandardMaterial color="#f2f" /> */}
   //   </points>
   // );
@@ -29,11 +28,11 @@ const Sphere = (props) => {
   // polygon - mesh
   // draw the sphere (mesh)
   const mesh = useRef();
-  const sunNoiseMaterial = useRef();
-  const sunShapeMaterial = useRef();
+  // const sunNoiseMaterial = useRef();
+  // const sunShapeMaterial = useRef();
   
-
-
+  // glsl
+  // 태양의 표면 질감
   const sunNoiseVertexShader = `
     #define GLSLIFY 1
     varying vec2 vUv;
@@ -217,16 +216,16 @@ const Sphere = (props) => {
     }
     // 태양 표면 효과
     void main(){
-        vec4 p = vec4(vPosition*0.3,uTime*0.03);
-        float noise = fbm4d(p);
-        gl_FragColor = vec4(noise);
-        float spots = max(snoise(p), 0.2);
-        gl_FragColor *= mix(1., spots, 0.7);
-        
-        // 청백색 색깔 입히기
-        vec3 color = vec3( vUv * ( 1. - 2. * noise ), 1.0 );
-        gl_FragColor = vec4( color.rgb, 1. );
-    }
+      vec4 p = vec4(vPosition*0.3,uTime*0.03);
+      float noise = fbm4d(p);
+      gl_FragColor = vec4(noise);
+      float spots = max(snoise(p), 0.2);
+      gl_FragColor *= mix(1., spots, 0.7);
+      
+      // 청백색 색깔 입히기
+      vec3 color = vec3( vUv * ( 1. - 2. * noise ), 1.0 );
+      gl_FragColor = vec4( color.rgb, 1. );
+  }
   `;
   
   // noise 간격이 촘촘한 효과
@@ -241,13 +240,26 @@ const Sphere = (props) => {
   //   }
   // `;
 
-    // 표면적이 큰 noise 연기로 감싸는 느낌의 효과
-    // void main(){
-    //   float noise=snoise(vec4(vUv*10.,1.,uTime));
-    //   vec4 p1=vec4(vPosition*5.,uTime*.25);
-    //   float spot=max(snoise(p1),0.);
-    //   gl_FragColor=vec4(noise);
-    // }`;
+  // 표면적이 큰 noise 연기로 감싸는 느낌의 효과
+  // void main(){
+  //   float noise=snoise(vec4(vUv*10.,1.,uTime));
+  //   vec4 p1=vec4(vPosition*5.,uTime*.25);
+  //   float spot=max(snoise(p1),0.);
+  //   gl_FragColor=vec4(noise);
+  // }`;
+
+  // 태양 표면 효과
+  //   void main(){
+  //     vec4 p = vec4(vPosition*0.3,uTime*0.03);
+  //     float noise = fbm4d(p);
+  //     gl_FragColor = vec4(noise);
+  //     float spots = max(snoise(p), 0.2);
+  //     gl_FragColor *= mix(1., spots, 0.7);
+      
+  //     // 청백색 색깔 입히기
+  //     // vec3 color = vec3( vUv * ( 1. - 2. * noise ), 1.0 );
+  //     // gl_FragColor = vec4( color.rgb, 1. );
+  // }
     
   const sunShapeVertexShader = `
   #define GLSLIFY 1
@@ -381,6 +393,7 @@ const Sphere = (props) => {
   }
   `;
 
+  // 태양 광채 효과
   const sunRingVertexShader = `
   #define GLSLIFY 1
   varying vec2 vUv;
@@ -449,7 +462,7 @@ const Sphere = (props) => {
   useFrame((state) => {
     const { clock } = state;
     mesh.current.material.uniforms.uTime.value = clock.getElapsedTime();
-    mesh.current.rotation.y = mesh.current.rotation.y += 0.0001
+    mesh.current.rotation.y = mesh.current.rotation.y += 0.0002
     // console.log(clock);
 
   });
@@ -472,7 +485,8 @@ const Sphere = (props) => {
     /> */}
     </mesh>
   );
-}
+
+};
 
 export default function Scene() {
   return (
@@ -480,7 +494,7 @@ export default function Scene() {
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
       <Sphere position={[0, 0, 0]}/>
-      <OrbitControls target={[0, 0, 0]} /* autoRotate */ /* autoRotateSpeed={5} */ />
+      <OrbitControls target={[0, 0, 0]} /* autoRotate autoRotateSpeed={0.005} */ />
     </>
     // <>
     //   <ambientLight />
