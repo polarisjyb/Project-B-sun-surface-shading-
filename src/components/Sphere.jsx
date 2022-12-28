@@ -224,6 +224,9 @@ const Sphere = (props) => {
         gl_FragColor=vec4(noise);
         float spots = max(snoise(p), 0.2);
         gl_FragColor *= mix(1., spots, 0.7);
+
+        vec3 color = vec3( vUv * ( 1. - 2. * noise ), 2.0 );
+        gl_FragColor = vec4( color.rgb, 1. );
     }
   `;
   
@@ -445,8 +448,8 @@ const Sphere = (props) => {
   );
 
   useFrame((state) => {
-    const { clock } = state;
-    mesh.current.material.uniforms.uTime.value = clock.getElapsedTime();
+    // const { clock } = state;
+    // mesh.current.material.uniforms.uTime.value = clock.getElapsedTime();
     mesh.current.rotation.y = mesh.current.rotation.y += 0.0001
     // console.log(clock);
 
@@ -459,12 +462,10 @@ const Sphere = (props) => {
     <sphereGeometry args={[10, 100, 100]} />
     <shaderMaterial
     ref={mesh}
-    vertexShader={sunNoiseVertexShader}
-    fragmentShader={sunNoiseFragmentShader}
-    uniforms={uniforms}
+
     // side={DoubleSide}
     />
-    {/* <meshPhongMaterial color="#f2f" sizeAttenuation /> */}
+    <meshPhongMaterial color="#c3c" sizeAttenuation />
     {/* <shaderMaterial ref={sunNoiseMaterial}
     vertexShader={sunNoiseVertexShader}
     fragmentShader={sunNoiseFragmentShader}
@@ -476,10 +477,10 @@ const Sphere = (props) => {
 export default function Scene() {
   return (
     <>
-      <ambientLight />
-      <pointLight position={[10, 10, 10]} />
+      {/* <ambientLight /> */}
+      <pointLight position={[0, 20, 40]} />
       <Sphere position={[0, 0, 0]}/>
-      <OrbitControls target={[0, 0, 0]} /* autoRotate */ /* autoRotateSpeed={5} */ />
+      <OrbitControls target={[0, 0, 0]} autoRotate autoRotateSpeed={0.01} />
     </>
     // <>
     //   <ambientLight />

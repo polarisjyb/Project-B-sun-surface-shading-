@@ -13,11 +13,11 @@ export function SpaceDust({ count }) {
     const temp = [];
     for (let i = 0; i < count; i++) {
       const time = Random.range(0, 100);
-      const factor = Random.range(30, 200);
+      const factor = Random.range(20, 120);
       const speed = Random.range(0.01, 0.015) / 2;
-      const x = Random.range(-100, 100);
-      const y = Random.range(-100, 100);
-      const z = Random.range(-100, 100);
+      const x = Random.range(-50, 50);
+      const y = Random.range(-50, 50);
+      const z = Random.range(-50, 50);
 
       temp.push({ time, factor, speed, x, y, z });
     }
