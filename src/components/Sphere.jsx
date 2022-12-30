@@ -448,10 +448,10 @@ const Sphere = (props) => {
   );
 
   useFrame((state) => {
-    // const { clock } = state;
-    // mesh.current.material.uniforms.uTime.value = clock.getElapsedTime();
+    const { clock } = state;
+    mesh.current.material.uniforms.uTime.value = clock.getElapsedTime();
     mesh.current.rotation.y = mesh.current.rotation.y += 0.0001
-    // console.log(clock);
+    console.log(clock);
 
   });
 
@@ -460,16 +460,17 @@ const Sphere = (props) => {
     <mesh {...props} ref={mesh} >
     {/* <boxGeometry args={[1, 1, 1]} /> */}
     <sphereGeometry args={[10, 100, 100]} />
-    <shaderMaterial
+    {/* <shaderMaterial
     ref={mesh}
 
-    // side={DoubleSide}
-    />
-    <meshPhongMaterial color="#c3c" sizeAttenuation />
-    {/* <shaderMaterial ref={sunNoiseMaterial}
+    side={DoubleSide}
+    /> */}
+    {/* <meshPhongMaterial color="#c3c" sizeAttenuation /> */}
+    <shaderMaterial ref={sunNoiseMaterial}
     vertexShader={sunNoiseVertexShader}
     fragmentShader={sunNoiseFragmentShader}
-    /> */}
+    uniforms={uniforms}
+    />
     </mesh>
   );
 }
