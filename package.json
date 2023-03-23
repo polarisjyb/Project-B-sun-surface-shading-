@@ -1,7 +1,7 @@
 {
   "name": "project-b",
   "version": "1.0.0",
-  "description": "세계지도 정보 제공 서비스",
+  "description": "태양 표면 쉐이딩",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config config/webpack.dev.js",
