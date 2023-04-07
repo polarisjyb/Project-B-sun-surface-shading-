@@ -6,3 +6,19 @@
 * threejs
 * react-three-fiber
 * react-three-drei
+
+
+Points
+https://youtube.com/shorts/uHEU_eUEauM?feature=share
+
+FlowNoising
+https://youtube.com/shorts/QsQGI-38Hy4?feature=share
+
+sunNoiseShaderTight
+https://youtube.com/shorts/4cKkyLk36VU
+
+sunNoiseShader
+https://youtube.com/shorts/bUrPa8vgKpg
+
+sunNoiseShaderBlue
+https://youtube.com/shorts/_nBUZ2KJXtA
