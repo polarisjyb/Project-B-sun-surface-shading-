@@ -14,11 +14,12 @@ npm install
 * webpack dev server 실행
 npm run dev
 
-* video link
+------------------------------------------------------
 
+video link
 
-* Points
-* https://youtube.com/shorts/uHEU_eUEauM?feature=share
+Points
+https://youtube.com/shorts/uHEU_eUEauM?feature=share
 
 FlowNoising
 https://youtube.com/shorts/QsQGI-38Hy4?feature=share
