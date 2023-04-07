@@ -7,12 +7,13 @@
 * react-three-fiber
 * react-three-drei
 
+-----------------------------------------------------
 
-* package 설치
-npm install
+package 설치
+* npm install
 
-* webpack dev server 실행
-npm run dev
+webpack dev server 실행
+* npm run dev
 
 ------------------------------------------------------
 
