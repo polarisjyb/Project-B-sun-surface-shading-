@@ -214,19 +214,32 @@ const Sphere = (props) => {
         }
         return sum;
     }
-    // 태양 표면 효과
+    // noise 간격이 촘촘한 효과
     void main(){
-      vec4 p = vec4(vPosition*0.3,uTime*0.03);
-      float noise = fbm4d(p);
-      gl_FragColor = vec4(noise);
-      float spots = max(snoise(p), 0.2);
-      gl_FragColor *= mix(1., spots, 0.7);
-      
-      // 청백색 색깔 입히기
-      vec3 color = vec3( vUv * ( 1. - 2. * noise ), 1.0 );
-      gl_FragColor = vec4( color.rgb, 1. );
-  }
+      vec4 p=vec4(vPosition*10.,uTime*.025);
+      float noise=fbm4d(p);
+      vec4 p1=vec4(vPosition*5.,uTime*.25);
+      float spot=max(snoise(p1),0.);
+      vec4 color=vec4(noise);
+      color*=mix(1.,spot,.7);
+      gl_FragColor=color;
+    }
   `;
+
+  // 태양 표면 효과
+  //   void main(){
+  //     vec4 p = vec4(vPosition*0.3,uTime*0.03);
+  //     float noise = fbm4d(p);
+  //     gl_FragColor = vec4(noise);
+  //     float spots = max(snoise(p), 0.2);
+  //     gl_FragColor *= mix(1., spots, 0.7);
+      
+  //     // 청백색 색깔 입히기
+  //     vec3 color = vec3( vUv * ( 1. - 2. * noise ), 1.0 );
+  //     gl_FragColor = vec4( color.rgb, 1. );
+  // }
+  // `;
+  
   
   // noise 간격이 촘촘한 효과
   //   void main(){
